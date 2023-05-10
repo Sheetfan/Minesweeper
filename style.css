@@ -1,0 +1,77 @@
+@font-face {
+    font-family: digital;
+    src: url(font/digital-7-mono.ttf);
+}
+
+@font-face {
+    font-family: number;
+    src: url(font/mine-sweeper.ttf);
+}
+
+:root{
+    --game-background-colour:rgb(212, 212, 212);
+    --inner-border-setting:3px inset #ffffff;
+}
+
+body{
+    width:100vw;
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    background-color: #b5b5b5;
+}
+.border{
+    border: 5px outset #ffffff;
+    padding: 10px;
+    background-color: var(--game-background-colour);
+}
+
+.hud{
+    font-family: "digital";
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
+    border: var(--inner-border-setting);
+}
+.bomb-left-counter,.time-taken{
+    position: relative;
+    font-size: 50px;
+    color: rgba(255, 0, 0, 0.242);
+    background: #000000;
+}
+.bomb-left-counter::after,.time-taken::after{
+    content: "000";
+    font-size: inherit;
+    left: 0px;
+    position: absolute;
+    color: rgba(255, 0, 0, 1);
+}
+
+.face-button{
+    background-color: var(--game-background-colour);
+    margin: 0px 10px;
+}
+.face-image{
+    width: 35px;
+    height: 35px; 
+}
+
+.board{
+    border: var(--inner-border-setting);
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.tile{
+    width: 10px;
+    height: 10px;
+    border: 2px outset #ffffff;
+    
+    /* flex-wrap: wrap; */
+}
+
+
+  
