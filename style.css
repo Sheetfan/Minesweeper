@@ -53,6 +53,7 @@ body{
 .face-button{
     background-color: var(--game-background-colour);
     margin: 0px 10px;
+    border: 5px outset #ffffff;
 }
 .face-image{
     width: 35px;
@@ -66,12 +67,18 @@ body{
     flex-wrap: wrap;
 }
 .tile{
-    width: 10px;
-    height: 10px;
-    border: 2px outset #ffffff;
-    
-    /* flex-wrap: wrap; */
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-family: "number";
+    font-size: 15px;
 }
 
+.tile-hidden{
+    border: 2px outset #ffffff;
+}
+.tile-adjective{
+    border: 1px solid #adadad;
+}
 
   
