@@ -36,13 +36,13 @@ body{
     justify-content: space-between;
     border: var(--inner-border-setting);
 }
-.bomb-left-counter,.time-taken{
+.bomb-left-background,.time-taken-background{
     position: relative;
     font-size: 50px;
     color: rgba(255, 0, 0, 0.242);
     background: #000000;
 }
-.bomb-left-counter::after,.time-taken::after{
+.bomb-left-counter,.time-taken-counter{
     content: "000";
     font-size: inherit;
     left: 0px;
@@ -65,10 +65,9 @@ body{
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
+    width:250px;
 }
 .tile{
-    width: 20px;
-    height: 20px;
     text-align: center;
     font-family: "number";
     font-size: 15px;
@@ -78,7 +77,7 @@ body{
     border: 2px outset #ffffff;
 }
 .tile-adjective{
-    border: 1px solid #adadad;
+    border: 2px solid #adadad;
 }
 
   
