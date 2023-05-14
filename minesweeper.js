@@ -257,6 +257,7 @@ function init(){
     time = 0;
     tiles = [];
     tilesleft = (settings.rows * settings.columns) - settings.bombs;
+    timeTakenCounter.innerHTML = pad(time,3);
     createBoard(settings.columns,settings.rows);
     for(let i = 0; i < settings.bombs; i++){
         placebomb();
