@@ -76,8 +76,13 @@ body{
 .tile-hidden{
     border: 2px outset #ffffff;
 }
-.tile-adjective{
+.tile-visible{
     border: 2px solid #adadad;
+}
+
+.img-tile{
+    width: auto;
+    height: 20px;
 }
 
   
