@@ -4,9 +4,9 @@ const timeTakenCounter = document.querySelector(".time-taken-counter");
 const faceImage = document.querySelector(".face-image");
 const faceButton = document.querySelector(".face-button");
 const settings = {
-    bombs: 50,
-    rows:15,
-    columns:30,
+    bombs: 15,
+    rows:7,
+    columns:15,
     tile:{
         width:20,
         height:20,
@@ -37,7 +37,7 @@ function pad(num, size) {
 }
 
 function getIndex(col,row) {
-    return col * settings.rows + row;
+    return row * settings.columns + col;
 }
 
 function clickTile(e){
@@ -54,10 +54,12 @@ function clickTile(e){
             }
         }  
     }
+    //console.log(e.currentTarget.id);
 }
 function getPos(e){
     const columns = parseInt(e.currentTarget.id.substring(0,e.currentTarget.id.indexOf(" ")));
     const rows = parseInt(e.currentTarget.id.substring(e.currentTarget.id.indexOf(" ")+1));
+
     return {columns,rows};
 }
 function rightClick(e){
@@ -72,9 +74,8 @@ faceButton.addEventListener("click",()=>{
 
 //fills in the tiles
 function createBoard(columns,rows){
-
-    for(let i = 0; i < columns; i++){
-        for(let k = 0; k < rows; k++){
+    for(let k = 0; k < rows; k++){
+        for(let i = 0; i < columns; i++){
             const div = document.createElement("div");
             const img = document.createElement("img");
             div.classList.add("tile","tile-hidden");
@@ -99,12 +100,14 @@ function createBoard(columns,rows){
             img.classList.add("img-tile");
             div.appendChild(img);
             boardSelector.appendChild(div);
+            div.id = `${i} ${k}`;
             tiles.push(new Tile(div));
 
-            div.id = `${i} ${k}`;
             
-        }
+            //console.log(div.id);
+        }               
     }
+    
     boardSelector.style.width = `${(settings.tile.width * columns) + (settings.tile.border *columns* 2)}px`;
     boardSelector.style.height = `${(settings.tile.height * rows) + (settings.tile.border *rows* 2)}px`;
     timerid = setInterval(()=>{
@@ -125,7 +128,7 @@ function placebomb(){
 
     if(!tiles[getIndex(col,row)].hasBomb){
         tiles[getIndex(col,row)].hasBomb = true;
-        // tiles[getIndex(col,row)].tile.firstElementChild.src = "img/mine.png";
+        //tiles[getIndex(col,row)].tile.firstElementChild.src = "img/mine.png";
     }
     else{
         placebomb();
@@ -213,7 +216,7 @@ function reveal(columns,rows){
                 }
             }
         }
-        console.log(tilesleft);
+        
     }     
 }
 
@@ -226,7 +229,7 @@ function win(){
         }
     });
     flagsleft = 0;
-    bombLeftCounter.innerHTML = flagsleft;
+    bombLeftCounter.innerHTML = pad(flagsleft,3);
 }
 function gameover(){
     active =false;
@@ -262,6 +265,12 @@ function init(){
     for(let i = 0; i < settings.bombs; i++){
         placebomb();
     }
+    tiles.forEach(tile=>{
+        if(tile.hasBomb){
+            console.log(tile.tile.id);
+        }
+        console.log();
+    });
     //placeNumbers();
 }
 
