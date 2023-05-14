@@ -4,9 +4,9 @@ const timeTakenCounter = document.querySelector(".time-taken-counter");
 const faceImage = document.querySelector(".face-image");
 const faceButton = document.querySelector(".face-button");
 const settings = {
-    bombs: 20,
-    rows:20,
-    columns:20,
+    bombs: 50,
+    rows:15,
+    columns:30,
     tile:{
         width:20,
         height:20,
@@ -14,6 +14,7 @@ const settings = {
     }
     
 }
+
 let active = true;
 let flagsleft = settings.bombs;
 let time = 0;
@@ -81,6 +82,20 @@ function createBoard(columns,rows){
             div.style.height = `${settings.tile.height}px`;
             div.addEventListener("click",clickTile);
             div.addEventListener("contextmenu",rightClick);
+            div.addEventListener("mousedown", (e)=>{
+                e.preventDefault();
+                if(active){
+                    faceImage.src = "img/shocked face.png";
+                }
+                
+            });
+            div.addEventListener("mouseup",(e) => {
+                e.preventDefault();
+                if(active){
+                    faceImage.src = "img/smiling face.png";
+                }
+                    
+            });
             img.classList.add("img-tile");
             div.appendChild(img);
             boardSelector.appendChild(div);
@@ -160,6 +175,33 @@ function reveal(columns,rows){
         }
         if(tiles[getIndex(columns,rows)].numbers > 0 ){
             tiles[getIndex(columns,rows)].tile.innerHTML = tiles[getIndex(columns,rows)].numbers;
+            switch (tiles[getIndex(columns,rows)].numbers) {
+                case 1:
+                    tiles[getIndex(columns,rows)].tile.style.color = "blue";
+                    break;
+                case 2:
+                    tiles[getIndex(columns,rows)].tile.style.color = "green";
+                    break;
+                case 3:
+                    tiles[getIndex(columns,rows)].tile.style.color = "red";
+                
+                    break;
+                case 4:
+                    tiles[getIndex(columns,rows)].tile.style.color = "darkblue";
+                    break;
+                case 5:
+                    tiles[getIndex(columns,rows)].tile.style.color = "brown";
+                    break;
+                case 6:
+                    tiles[getIndex(columns,rows)].tile.style.color = "cadetblue";
+                    break;
+                case 7:
+                    tiles[getIndex(columns,rows)].tile.style.color = "black";
+                    break;
+                case 8:
+                    tiles[getIndex(columns,rows)].tile.style.color = "gray";
+                    break;
+            }
         }
         else{
             for(let i = 0; i<8;i++){
