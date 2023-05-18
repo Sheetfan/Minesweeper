@@ -43,16 +43,19 @@ function getIndex(col,row) {
 function clickTile(e){
     e.preventDefault();
     if(active){
-        if(tiles[getIndex(getPos(e).columns,getPos(e).rows)].hasBomb){
-            clearInterval(timerid);
-            gameover();
-        }else{
-            reveal(getPos(e).columns,getPos(e).rows);
-            if(tilesleft === 0){
+        if(!tiles[getIndex(getPos(e).columns,getPos(e).rows)].hasFlag){
+            if(tiles[getIndex(getPos(e).columns,getPos(e).rows)].hasBomb){
                 clearInterval(timerid);
-                win();
-            }
-        }  
+                gameover();
+            }else{
+                reveal(getPos(e).columns,getPos(e).rows);
+                if(tilesleft === 0){
+                    clearInterval(timerid);
+                    win();
+                }
+            } 
+        }
+         
     }
     //console.log(e.currentTarget.id);
 }
@@ -110,12 +113,7 @@ function createBoard(columns,rows){
     
     boardSelector.style.width = `${(settings.tile.width * columns) + (settings.tile.border *columns* 2)}px`;
     boardSelector.style.height = `${(settings.tile.height * rows) + (settings.tile.border *rows* 2)}px`;
-    timerid = setInterval(()=>{
-        if(time >= 999){
-            time = 999;
-        }
-        timeTakenCounter.innerHTML = pad(time++,3);
-    },1000);
+    
     bombLeftCounter.innerHTML = pad(flagsleft,3);
     
 }
@@ -162,7 +160,7 @@ function reveal(columns,rows){
     ];
     
     // let hasFlag = false;
-    if(tiles[getIndex(columns,rows)].hidden && !tiles[getIndex(columns,rows)].hasFlag &&!tiles[getIndex(columns,rows)].hasBomb){
+    if(tiles[getIndex(columns,rows)].hidden && !tiles[getIndex(columns,rows)].hasBomb){
         tiles[getIndex(columns,rows)].tile.classList.remove("tile-hidden");
         tiles[getIndex(columns,rows)].tile.classList.add("tile-visible");
         tiles[getIndex(columns,rows)].hidden = false;
@@ -187,7 +185,6 @@ function reveal(columns,rows){
                     break;
                 case 3:
                     tiles[getIndex(columns,rows)].tile.style.color = "red";
-                
                     break;
                 case 4:
                     tiles[getIndex(columns,rows)].tile.style.color = "darkblue";
@@ -235,15 +232,15 @@ function gameover(){
     active =false;
     faceImage.src = "img/dead face.png";
     tiles.forEach(tile => {
-        if(tile.hasBomb){
-            tile.tile.classList.remove("tile-hidden");
-            tile.tile.classList.add("tile-visible");
-            tile.tile.firstElementChild.src = "img/mine.png";
-        }
-        else if(!tile.hasBomb && tile.hasFlag){
+        
+        if(!tile.hasBomb && tile.hasFlag){
             tile.tile.classList.remove("tile-hidden");
             tile.tile.classList.add("tile-visible");
             tile.tile.firstElementChild.src = "img/wrong mine.png";
+        }else if(tile.hasBomb && !tile.hasFlag){
+            tile.tile.classList.remove("tile-hidden");
+            tile.tile.classList.add("tile-visible");
+            tile.tile.firstElementChild.src = "img/mine.png";
         }
         
     });
@@ -262,16 +259,15 @@ function init(){
     tilesleft = (settings.rows * settings.columns) - settings.bombs;
     timeTakenCounter.innerHTML = pad(time,3);
     createBoard(settings.columns,settings.rows);
+    timerid = setInterval(()=>{
+        if(time >= 999){
+            time = 999;
+        }
+        timeTakenCounter.innerHTML = pad(++time,3);
+    },1000);
     for(let i = 0; i < settings.bombs; i++){
         placebomb();
     }
-    tiles.forEach(tile=>{
-        if(tile.hasBomb){
-            console.log(tile.tile.id);
-        }
-        console.log();
-    });
-    //placeNumbers();
 }
 
 window.addEventListener("load",() => {
