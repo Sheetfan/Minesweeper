@@ -54,9 +54,7 @@ body{
     background-color:var(--settings-primary-colour);
     
 }
-
 .cells{
-    /* padding: 0px 5px; */
    margin: 2px .3125rem;
 }
 .x-button{

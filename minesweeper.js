@@ -1,28 +1,44 @@
+const settingButton = document.querySelector(".setting-button");
+const settingsOptionsContainer = document.querySelector(".settings-options-container");
+const xButton = document.querySelector(".x-button");
+const difficultyRadioButtons = document.querySelectorAll('input[name="difficulty"]');
+const rowsTextbox = document.querySelector("#rows-textbox");
+const columnsTextBox = document.querySelector("#columns-textbox");
+const bombTextBox = document.querySelector("#bombs-textbox")
 const boardSelector = document.querySelector(".board");
 const bombLeftCounter = document.querySelector(".bomb-left-counter");
 const timeTakenCounter = document.querySelector(".time-taken-counter");
+const newGameButton = document.querySelector(".new-game-button");
+
 const faceImage = document.querySelector(".face-image");
 const faceButton = document.querySelector(".face-button");
-const settings = {
-    bombs: 10,
-    rows:9,
-    columns:9,
-    tile:{
-        width:15,
-        height:15,
-        border:2
-    }
-    
-}
 
+
+let settings;
 let active = true;
-let flagsleft = settings.bombs;
+let flagsleft;
 let time = 0;
 let tiles = [];
-let tilesleft = (settings.rows * settings.columns) - settings.bombs;
+let tilesleft;
 let timerid;
 
 //to create the tiles
+function createSettings(columns,rows,bombs){
+    let bomb = bombs;
+    let row = rows;
+    let column = columns;
+    settings = {
+        bombs: bomb,
+        rows: row,
+        columns: column,
+        tile:{
+            width:15,
+            height:15,
+            border:2
+        }
+    }
+    return settings;
+}
 function Tile(tile){
     this.hasBomb = false;
     this.numbers = 0;
@@ -57,7 +73,7 @@ function clickTile(e){
         }
          
     }
-    //console.log(e.currentTarget.id);
+
 }
 
 function getPos(e){
@@ -73,9 +89,6 @@ function rightClick(e){
     }
 }
 
-faceButton.addEventListener("click",()=>{
-    init();
-});
 
 //fills in the tiles
 function createBoard(columns,rows){
@@ -247,11 +260,7 @@ function gameover(){
         
     });
 }
-
-function init(){
-    tiles.forEach(tile =>{
-        tile.tile.remove();
-    });
+function setVariables(){
     clearInterval(timerid);
     faceImage.src = "img/smiling face.png";
     active = true;
@@ -267,11 +276,84 @@ function init(){
         }
         timeTakenCounter.innerHTML = pad(++time,3);
     },1000);
+}
+function checkSettingsInput(){
+    let flag = true
+    let rows = parseInt(rowsTextbox.value);
+    let columns = parseInt(columnsTextBox.value);
+    let bombs = parseInt(bombTextBox.value);
+    let maxBomb = rows * columns;
+    if(rowsTextbox.value.trim() === "" || columnsTextBox.value.trim() === "" || bombTextBox.value.trim() === ""){
+        flag = false;
+    }
+    if(!(/^\d+$/.test(rowsTextbox.value)) || !(/^\d+$/.test(columnsTextBox.value)) || !(/^\d+$/.test(bombTextBox.value))){
+        console.log(/^\d+$/.test(rowsTextbox.value));
+        flag = false;
+    }
+    if(rows <= 0){
+        rowsTextbox.value = "9";
+        flag = false;
+    }
+    if (columns <= 0){
+        columnsTextBox.value = "9";
+        flag = false;
+    }
+    if (bombs <= 0){
+        bombTextBox.value = "9";
+        flag = false;
+    }
+    if(rows > 99){
+        rowsTextbox.value = "99";
+        flag = false;
+    }
+    if(columns > 99){
+        columnsTextBox.value = "99";
+        flag = false;
+    }
+    if(bombs > 999){
+        bombTextBox.value = "999";
+        flag = false;
+    }else if(bombs >= maxBomb){
+        bombTextBox.value = maxBomb - 1;
+        flag = false;
+    }
+    return flag;
+}
+function setDifficulty(){
+    if(difficultyRadioButtons[0].checked){
+        createSettings(9,9,10);
+    }else if(difficultyRadioButtons[1].checked){
+        createSettings(16,16,40);
+    }
+    else if(difficultyRadioButtons[2].checked){
+        createSettings(30,16,99);
+    }
+    else if(difficultyRadioButtons[3].checked){
+        createSettings(parseInt(columnsTextBox.value), parseInt(rowsTextbox.value), parseInt(bombTextBox.value));
+    }
+}
+function init(){
+    tiles.forEach(tile =>{
+        tile.tile.remove();
+    });
+
+    setDifficulty();
+    setVariables();
+
     for(let i = 0; i < settings.bombs; i++){
         placebomb();
     }
 }
 
+faceButton.addEventListener("click",()=>{
+    init(); 
+});
+newGameButton.addEventListener("click",()=>{
+    if(checkSettingsInput()){
+        init();
+    }
+    
+});
 window.addEventListener("load",() => {
     init();
 });

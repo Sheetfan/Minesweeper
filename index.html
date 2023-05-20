@@ -12,38 +12,43 @@
         <button class="setting-button"><img class="setting-img" src="img/setting icon.png" alt=""></button>
     </div>
     <div class="settings-options-container">
-        
         <div class="settings-options">
             <span></span><span></span><span></span><span style="text-align: end;"><strong class="x-button">x</strong></span>
+
             <span class="row-1"> </span><span id="row"class="row-1 cells">Rows</span><span class="row-1 cells" id="column">Columns</span><span class="row-1 cells"id="bomb">Bombs</span>
+            
             <div class="cells radiobox">
-                <input type="radio" id = "beginner" name="difficulty">
+                <input type="radio" id = "beginner" name="difficulty" value="beginner" checked = "true">
                 <label for="beginner">Beginning:</label>
             </div>
             <span class="cells">9</span>
             <span class="cells">9</span>
             <span class="cells">10</span>
+            
             <div class="cells radiobox">
-                <input type="radio" id="intermediate" name="difficulty">
+                <input type="radio" id="intermediate" name="difficulty" value="intermediate">
                 <label for="intermediate">Intermediate:</label>
             </div>
             <span class="cells">16</span>
             <span class="cells">16</span>
             <span class="cells">40</span>
+            
             <div class="cells radiobox">
-                <input type="radio" id="expert" name="difficulty">
+                <input type="radio" id="expert" name="difficulty" value="expert">
                 <label for="expert">Expert:</label>
             </div>
             <span class="cells">16</span>
             <span class="cells">30</span>
             <span class="cells">99</span>
+           
             <div class="cells radiobox">
-                <input type="radio" id="custom" name="difficulty">
+                <input type="radio" id="custom" name="difficulty" value="custom">
                 <label for="custom">Custom:</label>
             </div>
-            <input class="cells"type="text" name="" id="beginner-textbox">
-            <input class="cells"type="text" name="" id="intermediate-textbox">
-            <input class="cells"type="text" name="" id="expert-textbox">
+            <input class="cells"type="text" name="" id="rows-textbox" value="9">
+            <input class="cells"type="text" name="" id="columns-textbox" value="9">
+            <input class="cells"type="text" name="" id="bombs-textbox" value="9">
+
             <div class="new-game-button-container"><button class="new-game-button">New game</button></div>
         </div>
     </div>
