@@ -345,14 +345,20 @@ function init(){
     }
 }
 
+settingButton.addEventListener("click", ()=>{
+    settingsOptionsContainer.style.display = "flex";
+});
+xButton.addEventListener("click",() =>{
+    settingsOptionsContainer.style.display = "none";
+});
 faceButton.addEventListener("click",()=>{
     init(); 
 });
 newGameButton.addEventListener("click",()=>{
     if(checkSettingsInput()){
+        settingsOptionsContainer.style.display = "none";
         init();
     }
-    
 });
 window.addEventListener("load",() => {
     init();
