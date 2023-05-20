@@ -4,12 +4,12 @@ const timeTakenCounter = document.querySelector(".time-taken-counter");
 const faceImage = document.querySelector(".face-image");
 const faceButton = document.querySelector(".face-button");
 const settings = {
-    bombs: 15,
-    rows:7,
-    columns:15,
+    bombs: 10,
+    rows:9,
+    columns:9,
     tile:{
-        width:20,
-        height:20,
+        width:15,
+        height:15,
         border:2
     }
     
@@ -59,18 +59,20 @@ function clickTile(e){
     }
     //console.log(e.currentTarget.id);
 }
+
 function getPos(e){
     const columns = parseInt(e.currentTarget.id.substring(0,e.currentTarget.id.indexOf(" ")));
     const rows = parseInt(e.currentTarget.id.substring(e.currentTarget.id.indexOf(" ")+1));
-
     return {columns,rows};
 }
+
 function rightClick(e){
     e.preventDefault();
     if(active){
         flag(getPos(e).columns,getPos(e).rows);
     }
 }
+
 faceButton.addEventListener("click",()=>{
     init();
 });

@@ -9,80 +9,115 @@
 }
 
 :root{
-    --game-background-colour:rgb(212, 212, 212);
-    --inner-border-setting:3px inset #ffffff;
+    --main-background-color: #b5b5b5;
+    --game-background-colour:#d4d4d4;
+    --inner-border-setting:.1875rem inset #ffffff;
+    --settings-primary-colour:#ffffff;
+    --settings-secondary-colour:#dbdbdb;
 }
 
 body{
-    width:100vw;
-    height: 100vh;
+    margin: 0rem;
+    background-color: var(--main-background-color);
+}
+.setting-container{
+   text-align: end; 
+}
+.setting-button{
+    background-color:var(--main-background-color);
+    border: 0rem;
+}
+.setting-img{
+    width:1.875rem;
+    opacity: 0.5;
+    height: auto;
+}
+.settings-options{
+    display: grid;
+    grid-template-columns: auto 65px 65px 65px;
+    width: 19.8125rem;
+    background-color:var(--settings-primary-colour);
+    /* gap:2px 7px; */
+}
+
+.cells{
+    /* padding: 0px 5px; */
+   margin: 2px .3125rem;
+}
+
+.new-game-button-container{
+    background-color:#dbdbdb;
+    grid-column-start: 1;
+    grid-column-end: 5;
+}
+.new-game-button{
+    margin: 5px;
+}
+.game-container{
     display:flex;
     justify-content: center;
-    align-items: center;
-    margin: 0px;
-    background-color: #b5b5b5;
 }
 .border{
-    border: 5px outset #ffffff;
-    padding: 10px;
+    border: .3125rem outset #ffffff;
+    padding: .625rem;
     background-color: var(--game-background-colour);
 }
 
 .hud{
     font-family: "digital";
     display: flex;
-    padding: 5px;
+    padding: .3125rem;
     align-items: center;
     justify-content: space-between;
     border: var(--inner-border-setting);
 }
 .bomb-left-background,.time-taken-background{
     position: relative;
-    font-size: 50px;
+    font-size: 2.1875rem;
     color: rgba(255, 0, 0, 0.242);
     background: #000000;
 }
 .bomb-left-counter,.time-taken-counter{
     content: "000";
     font-size: inherit;
-    left: 0px;
+    left: 0rem;
     position: absolute;
     color: rgba(255, 0, 0, 1);
 }
 
 .face-button{
     background-color: var(--game-background-colour);
-    margin: 0px 10px;
-    border: 5px outset #ffffff;
+    border: .3125rem outset #ffffff;
 }
 .face-image{
-    width: 35px;
-    height: 35px; 
+    width: 1.25rem;
+    height: auto; 
 }
 
 .board{
     border: var(--inner-border-setting);
-    margin-top: 10px;
+    margin-top: .625rem;
     display: flex;
     flex-wrap: wrap;
-    width:250px;
+    min-width:9.375rem;
 }
 .tile{
     text-align: center;
     font-family: "number";
-    font-size: 15px;
+    padding: 0rem;
+    font-size: .625rem;
 }
 
 .tile-hidden{
-    border: 2px outset #ffffff;
+    border: .125rem outset #ffffff;
 }
 .tile-visible{
-    border: 2px solid #adadad;
+    border: .125rem solid #adadad;
 }
 
 .img-tile{
     width: auto;
-    height: 20px;
+    height: .9375rem;
 }
 
   

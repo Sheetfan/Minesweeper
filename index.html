@@ -8,13 +8,56 @@
     <title>Minesweeper</title>
 </head>
 <body>
-    <div class="border">
-        <div class="hud">
-            <div class="bomb-left-background">888<span class = "bomb-left-counter">000</span></div>
-            <button class = "face-button"><img class = "face-image" src="img/smiling face.png" alt=""></button>
-            <div class="time-taken-background">888<span class = "time-taken-counter">000</span></div>
+    <div class="setting-container">
+        <button class="setting-button"><img class="setting-img" src="img/setting icon.png" alt=""></button>
+    </div>
+    <div class="settings-options">
+        <span class="row-1"> </span><span id="row"class="row-1 cells">Rows</span><span class="row-1 cells" id="column">Columns</span><span class="row-1 cells"id="bomb">Bombs</span>
+        <div class="cells radiobox">
+            <input type="radio" id = "beginner" name="difficulty">
+            <label for="beginner">Beginning:</label>
         </div>
-        <div class="board"></div>
+        <span class="cells">9</span>
+        <span class="cells">9</span>
+        <span class="cells">10</span>
+
+        <div class="cells radiobox ">
+            <input type="radio" id="intermediate" name="difficulty">
+            <label for="intermediate">Intermediate:</label>
+        </div>
+        <span class="cells">16</span>
+        <span class="cells">16</span>
+        <span class="cells">40</span>
+
+        <div class="cells radiobox">
+            <input type="radio" id="expert" name="difficulty">
+            <label for="expert">Expert:</label>
+        </div>
+        <span class="cells">16</span>
+        <span class="cells">30</span>
+        <span class="cells">99</span>
+
+        <div class="cells radiobox">
+            <input type="radio" id="custom" name="difficulty">
+            <label for="custom">Custom:</label>
+        </div>
+        <input class="cells"type="text" name="" id="beginner-textbox">
+        <input class="cells"type="text" name="" id="intermediate-textbox">
+        <input class="cells"type="text" name="" id="expert-textbox">
+
+        <div class="new-game-button-container"><button class="new-game-button">New game</button></div>
+    </div>
+        
+   
+    <div class="game-container">
+        <div class="border">
+            <div class="hud">
+                <div class="bomb-left-background">888<span class = "bomb-left-counter">000</span></div>
+                <button class = "face-button"><img class = "face-image" src="img/smiling face.png" alt=""></button>
+                <div class="time-taken-background">888<span class = "time-taken-counter">000</span></div>
+            </div>
+            <div class="board"></div>
+        </div>
     </div>
     <script src="minesweeper.js"></script>
 </body>
